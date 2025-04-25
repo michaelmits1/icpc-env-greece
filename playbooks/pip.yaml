@@ -1,0 +1,18 @@
+---
+  - name: Ensure Python3 venv and pip are installed
+    apt:
+      name:
+        - python3-venv
+        - python3-pip
+      state: present
+      update_cache: yes
+
+  - name: Create a virtualenv for Ansible-related Python packages
+    command: python3 -m venv /opt/ansible-venv
+    args:
+      creates: /opt/ansible-venv
+
+  - name: Install passlib in the virtualenv
+    pip:
+      name: passlib
+      virtualenv: /opt/ansible-venv
