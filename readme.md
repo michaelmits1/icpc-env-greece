@@ -42,9 +42,10 @@ cd icpc-env-greece
   * Install required packages
     ```bash
     sudo apt-get install qemu-system-x86 genisoimage bsdtar ansible # Debian based Distros
+    sudo apt-get install qemu-system-x86 genisoimage ansible libarchive-tools # newer Debian based Distros without bsdtar
     sudo pacman -S qemu-system-x86 cdrtools libarchive ansible # Arch Based Distros
     ```
-  * Download the 64 bit version of Ubuntu 20.04.6 Server inside the cloned directory:
+  * Download the 64 bit version of Ubuntu 22.04.2 Server inside the cloned directory:
     ```bash
     curl -O https://releases.ubuntu.com/jammy/ubuntu-22.04.2-live-server-amd64.iso
     ```
@@ -53,8 +54,24 @@ cd icpc-env-greece
     cd files && curl -O https://ftp2.osuosl.org/pub/eclipse/technology/epp/downloads/release/2023-06/R/eclipse-java-2023-06-R-linux-gtk-x86_64.tar.gz
 
 1. Run secrets/gen-secrets.sh to create some ssh keys/other secret data. Follow this with ./fetch-secrets.sh to put them in the right place for ansible.
+```bash
+cd ../secrets
+chmod u+x gen-secrets.sh
+./gen-secrets.sh
+```
+```bash
+cd ..
+chmod u+x fetch-secrets.sh
+./fetch-secrets.sh
+```
 2. Copy `group_vars/all.dist` to `group_vars/all` and edit it to your liking. Specifically
 set the icpcadmin password, and firewall expiration properly.
+```bash
+cp group_vars/all.dist group_vars/all
+# If you want to edit password and firewall expiration
+code group_vars/all #opens editor
+```
+
 3. Run the `create_baseimg.sh` script to create an unattended installation disk for ubuntu, perform the installation,
 and leave the base image ready for processing. During this step you can specify how large you want the image to be(Default 28500M to fit on most
 32G flash drives).
