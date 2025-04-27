@@ -58,6 +58,10 @@
       - yelp
       - desktop-base
       - vlc-data
+      - gnome-sudoku
+      - gnome-mines
+      - gnome-mahjongg
+      - aisleriot
 
 - name: setup gdm3 autologin 
   copy: src=files/custom.conf dest=/etc/gdm3/custom.conf

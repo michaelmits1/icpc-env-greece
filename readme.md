@@ -81,11 +81,11 @@ and leave the base image ready for processing. During this step you can specify 
 ```
 4. Build the actual contestant image. This step takes the base image, boots it up,
 runs ansible to configure everything, performs a few final cleanup steps, and finally
-powers it off. Take a walk, this step takes some time(10-30minutes)
+powers it off. Take a walk, this step takes some time(10-30minutes).
 ```bash
 ./build-final.sh
 ```
-5. Take the newly minted image and copy it to a usb drive (or hard drive) (as root). You can see all devices ny running 'lsblk'
+5. Take the newly minted image and copy it to a usb drive (or hard drive) (as root). You can see all devices by running 'lsblk'.
 ```
 # WARNING: Make sure to replace /dev/sdx with your actual device
 sudo dd if=output/all-2025-09-01_image-amd64.img of=/dev/sdx bs=1M status=progress oflag=direct conv=sparse
