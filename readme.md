@@ -28,6 +28,7 @@ We will reduce the features of the original image to supports the following:
 * qemu, uml-utlities
 * Approx 30GB disk space free
 * Ansible
+* Python3
 
 ## Building the Image
 Building the image is a very simple process, and takes between 10-30minutes
