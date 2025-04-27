@@ -1,0 +1,25 @@
+---
+- name: install the packages necessary to make GNOME run
+  apt:
+    state: present
+    pkg:
+      - xserver-xorg
+      - gdm3
+      - gnome-shell
+      - gnome-session
+      - gnome-terminal
+      - gnome-control-center
+
+- name: install GNOME and friends
+  apt:
+    state: present
+    pkg:
+      #core GNOME packages
+      - ubuntu-gnome-desktop
+      - gnome-tweaks
+      - gnome-shell-extensions
+      #replacement for xfce utils
+      - nautilus #file manager
+      - gnome-calculator
+      - gnome-screenshot
+      - gnome-power-manager
