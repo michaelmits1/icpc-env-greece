@@ -67,20 +67,6 @@
 - name: Copy autostart desktop entry to set wallpaper
   copy: src=files/icpc_autostart.desktop dest=/etc/xdg/autostart/icpc_autostart.desktop
 
-- name: ensure python3-pip is installed
-  apt:
-    name: python3-pip
-    state: present
-- name: install python3-venv for firstboot
-  apt:
-    name: python3-venv
-    state: present
-- name: install passlib for password hashing
-  pip:
-    name: passlib
-    state: present
-    executable: pip3
-
 - name: create icpcadmin group
   group: name='icpcadmin' state='present'
 - name: create icpcadmin user
