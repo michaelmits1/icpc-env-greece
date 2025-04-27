@@ -87,9 +87,6 @@
 
     - import_tasks: 'playbooks/firewall.yaml'
 
-    # Under review
-    #- import_tasks: 'playbooks/pip.yaml'
-
     # Management related things
     #- import_tasks: 'playbooks/ansible-pull.yml'
     #- import_tasks: 'playbooks/reversetunnel.yml'
