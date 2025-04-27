@@ -3,3 +3,4 @@ Version=1.0
 Name=Script
 Type=Application
 Exec=/icpc/scripts/set_wallpaper.sh
+OnlyShowIn=GNOME;

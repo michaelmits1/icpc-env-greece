@@ -1,4 +1,45 @@
 ---
+- name: GNOME-specific system settings
+  block:
+    - name: Install python dependeciies for dconf
+      apt:
+        pkg:
+          - python3-psutil
+          - python3-gi
+        state: present
+
+    - name: Install GNOME tweak tools and extensions
+      apt:
+        pkg:
+          - gnome-tweaks
+          - chrome-gnome-shell  # For browser integration with extensions
+        state: present
+
+    - name: Configure GNOME session settings
+      dconf:
+        key: "/org/gnome/desktop/session/idle-delay"
+        value: "uint32 0"
+      become: yes
+      become_user: contestant
+
+    - name: Disable screen locking
+      dconf:
+        key: "/org/gnome/desktop/screensaver/lock-enabled"
+        value: "false"
+      become: yes
+      become_user: contestant
+
+    - name: Optimize GNOME performance
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "/org/gnome/mutter/experimental-features", value: "['x11-randr-fractional-scaling']" }
+        - { key: "/org/gnome/desktop/interface/enable-animations", value: "false" }
+        - { key: "/org/gnome/desktop/interface/text-scaling-factor", value: "1.0" }
+      become: yes
+      become_user: contestant
+      
 - name: useful packages for admins
   apt:
     pkg:

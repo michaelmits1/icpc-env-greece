@@ -20,26 +20,32 @@ else
 fi
 
 # wait for xfdesktop to be loaded
-echo "Waiting for xfdesktop to be running"
-while ! pgrep xfdesktop; do
+echo "Waiting for gnome-shell to be running"
+while ! pgrep gnome-shell; do
   sleep 1
 done
 
 # wait a few moments for things to load initally
 sleep 5
 
-echo "Update the desktop background properties"
-xfconf-query -c xfce4-desktop -p /backdrop/screen0 -rR
-xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/last-image --create -t string -s $BACKGROUND
-xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path --create -t string -s $BACKGROUND
-xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-style --create -t int -s 3
+#Set the wallpaper for GNOME
+if [ -f "$UTILDIR/teamWallpaper.png" ]; then
+  BACKGROUND="file://$UTILDIR/teamWallpaper.png"
+else
+  # Set the wallpaper to the "template"
+  BACKGROUND="file://$UTILDIR/wallpaper.png"
+fi
+
+gsettings set org.gnome.desktop.background picture-uri "$BACKGROUND"
+gsettings set org.gnome.desktop.background picture-uri-dark "$BACKGROUND"
+gsettings set org.gnome.desktop.background picture-options 'zoom'
 
 # Reload xfdesktop to get the background image showing (--reload doesn't work, have to --quit first...)
-echo "Reload xfdesktop to refresh the background"
-sleep 5
-xfdesktop --quit
-timeout 5 xfdesktop --reload
-sleep 5
-xfdesktop --quit
-timeout 5 xfdesktop --reload
+# echo "Reload xfdesktop to refresh the background"
+# sleep 5
+# xfdesktop --quit
+# timeout 5 xfdesktop --reload
+# sleep 5
+# xfdesktop --quit
+# timeout 5 xfdesktop --reload
 

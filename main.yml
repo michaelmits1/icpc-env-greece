@@ -75,7 +75,7 @@
         state: absent
         purge: yes
 
-    - import_tasks: 'playbooks/gui.yml'
+    - import_tasks: 'playbooks/gui.yaml'
 
     - import_tasks: 'playbooks/reverseproxy.yml'
     - import_tasks: 'playbooks/proxy.yaml'

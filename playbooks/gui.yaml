@@ -9,13 +9,13 @@
       - gnome-session
       - gnome-terminal
       - gnome-control-center
+      - ubuntu-gnome-desktop
 
 - name: install GNOME and friends
   apt:
     state: present
     pkg:
-      #core GNOME packages
-      - ubuntu-gnome-desktop
+      #core GNOME packages      
       - gnome-tweaks
       - gnome-shell-extensions
       #replacement for xfce utils
@@ -23,3 +23,58 @@
       - gnome-calculator
       - gnome-screenshot
       - gnome-power-manager
+
+
+- name: add mozilla firefox ppa (because snaps are dumb)
+  ansible.builtin.apt_repository:
+    repo: ppa:mozillateam/ppa
+    update_cache: yes
+
+- name: apt preference for firefox to only install from the ppa
+  copy:
+    dest: /etc/apt/preferences.d/mozilla-firefox
+    content: |
+      Package: firefox
+      Pin: release o=LP-PPA-mozillateam
+      Pin-Priority: 1001
+
+- name: install gui apps
+  apt:
+    state: present
+    pkg:
+      - firefox   # Web browser (from ppa, not snap)
+      - alacarte  # Menu editor
+      - mupdf     # Lighweight pdf viewer
+      - mate-calc # GUI calculator
+
+- name: Remove unneeded packages
+  apt:
+    state: absent
+    purge: yes
+    pkg:
+      - byobu
+      - xscreensaver
+      - xscreensaver-data
+      - yelp
+      - desktop-base
+      - vlc-data
+
+- name: setup gdm3 autologin 
+  copy: src=files/custom.conf dest=/etc/gdm3/custom.conf
+
+- name: configure xorg/x11
+  copy: src=files/xorg.conf dest=/etc/X11/xorg.conf
+
+#gnome handles templates differently than xfce
+- name: delete any template autostart files
+  file:
+    state: absent
+    path: /etc/xdg/autostart/xdg-user-dirs-update.desktop
+
+- name: delete some .desktop shortcuts (so they don't show up in the applications menu)
+  file:
+    state: absent
+    path: /usr/share/applications/{{ item }}
+  with_items:
+     - org.gnome.Software.desktop        #software center
+     - gnome-session-properties.desktop  #startup apps
