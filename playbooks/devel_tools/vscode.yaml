@@ -33,3 +33,21 @@
       Type=Application
       Exec=/usr/local/bin/vscode-extension-install
       NoDisplay=true
+
+- name: add vscode settings to disable specific extensions
+  copy:
+    dest: /opt/vscode/settings.json
+    content: |
+      {
+        "extensions.ignoreRecommendations": true,
+        "extensions.autoUpdate": false,
+        "extensions.showRecommendationsOnlyOnDemand": false,
+        "extensions.disableExtensions": [
+          "vscodevim.vim",
+          "lfs.vscode-emacs-friendly",
+          "akamud.vscode-theme-onedark",
+          "akamud.vscode-theme-onelight",
+          "tgreen7.one-monokai-dark",
+          "jprestidge.theme-material-theme"
+          ]
+      }
