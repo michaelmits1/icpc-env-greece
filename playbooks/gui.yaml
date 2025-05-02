@@ -9,7 +9,7 @@
       - gnome-session
       - gnome-terminal
       - gnome-control-center
-      - ubuntu-gnome-desktop
+      - ubuntu-desktop-minimal
 
 - name: install GNOME and friends
   apt:
@@ -58,10 +58,10 @@
       - yelp
       - desktop-base
       - vlc-data
-      - gnome-sudoku
-      - gnome-mines
-      - gnome-mahjongg
-      - aisleriot
+      #- gnome-sudoku
+      #- gnome-mines
+      #- gnome-mahjongg
+      #- aisleriot
 
 - name: setup gdm3 autologin 
   copy: src=files/custom.conf dest=/etc/gdm3/custom.conf
