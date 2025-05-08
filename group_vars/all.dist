@@ -29,6 +29,7 @@ devtools:
 vscode_extensions:
   # C/C++
   - ms-vscode.cpptools-extension-pack
+  - ms-vscode.cpptools
   # Python
   - ms-python.python
   - kevinrose.vsc-python-indent
