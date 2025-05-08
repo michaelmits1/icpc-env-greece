@@ -25,29 +25,21 @@
       mkdir -p $HOME/.vscode
       ln -sf /opt/vscode/extensions $HOME/.vscode/extensions
 
-- name: add vscode extension install script to autostart
-  copy:
-    dest: /etc/xdg/autostart/vscode-extension-install.desktop
-    content: |
-      [Desktop Entry]
-      Type=Application
-      Exec=/usr/local/bin/vscode-extension-install
-      NoDisplay=true
+- name: Ensure Python 3 is installed
+  apt:
+    name: python3
+    state: present
+  become: yes
 
-- name: add vscode settings to disable specific extensions
+- name: Copy the ext_slayer.py script to the VM
   copy:
-    dest: /opt/vscode/settings.json
-    content: |
-      {
-        "extensions.ignoreRecommendations": true,
-        "extensions.autoUpdate": false,
-        "extensions.showRecommendationsOnlyOnDemand": false,
-        "extensions.disableExtensions": [
-          "vscodevim.vim",
-          "lfs.vscode-emacs-friendly",
-          "akamud.vscode-theme-onedark",
-          "akamud.vscode-theme-onelight",
-          "tgreen7.one-monokai-dark",
-          "jprestidge.theme-material-theme"
-          ]
-      }
+    src: ext_slayer.py
+    dest: /usr/local/bin/ext_slayer.py
+    mode: '0755'
+  become: yes
+
+- name: Run ext_slayer.py to mark extensions as disabled
+  become: yes
+  shell: |
+    sudo -u contestant env HOME=/home/contestant \
+      python3 /usr/local/bin/ext_slayer.py
