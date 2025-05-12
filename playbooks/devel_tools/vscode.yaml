@@ -33,7 +33,7 @@
 
 - name: Copy the ext_slayer.py script to the VM
   copy:
-    src: /home/MyStuff/icpc-env-greece/playbooks/devel_tools/ext_slayer.py
+    src: "{{ playbook_dir }}/files/scripts/ext_slayer.py"
     dest: /usr/local/bin/ext_slayer.py
     mode: '0755'
   become: yes
