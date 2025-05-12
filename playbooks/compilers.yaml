@@ -37,8 +37,8 @@
     loop_control:
       loop_var: language
 
-  - name: make symbolic link to the docs on the desktop
-    file:
-      state: link
-      src: /icpc/documentation
-      dest: /home/contestant/Desktop
+  # - name: make symbolic link to the docs on the desktop
+  #   file:
+  #     state: link
+  #     src: /icpc/documentation
+  #     dest: /home/contestant/Desktop
