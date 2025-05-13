@@ -45,7 +45,6 @@
       - firefox   # Web browser (from ppa, not snap)
       - alacarte  # Menu editor
       - mupdf     # Lighweight pdf viewer
-      - mate-calc # GUI calculator
 
 - name: Remove unneeded packages
   apt:
