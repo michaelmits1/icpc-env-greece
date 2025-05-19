@@ -38,8 +38,8 @@
     mode: '0755'
   become: yes
 
-- name: Run ext_slayer.py to mark extensions as disabled
-  become: yes
-  shell: |
-    sudo -u contestant env HOME=/home/contestant \
-      python3 /usr/local/bin/ext_slayer.py
+# - name: Run ext_slayer.py to mark extensions as disabled
+#   become: yes
+#   shell: |
+#     sudo -u contestant env HOME=/home/contestant \
+#       python3 /usr/local/bin/ext_slayer.py

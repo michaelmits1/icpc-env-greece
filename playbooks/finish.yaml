@@ -1,0 +1,16 @@
+---
+- name: make sure codeblocks config dir exists
+  file: 
+    state=directory 
+    path=/home/contestant/.config/codeblocks
+
+- name: copy codeblocks config to contestant directory
+  copy:
+    src: /home/vkokotakis/.config/codeblocks/default.conf
+    dest: /home/contestant/.config/codeblocks
+
+- name: make contestant the owner of the codeblocks .conf
+  file:
+    path: /home/contestant/.config/codeblocks/default.conf
+    owner: contestant
+    mode: '0664'

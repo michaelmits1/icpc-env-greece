@@ -84,6 +84,7 @@
     - import_tasks: 'playbooks/vmtouch.yml'
     - import_tasks: 'playbooks/system.yml'
     - import_tasks: 'playbooks/firewall.yaml'
+    - import_tasks: 'playbooks/finish.yaml'
 
     # Management related things
     #- import_tasks: 'playbooks/ansible-pull.yml'
